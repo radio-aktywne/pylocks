@@ -1,0 +1,13 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: 0.4.2
+_src_path: gh:radio-aktywne/template-package-python
+accountname: radio-aktywne
+description: Locking utilities for Python 🐍
+docs: true
+docsurl: https://radio-aktywne.github.io/package-pylocks
+email: it@radioaktywne.pl
+importname: pylocks
+packagename: pylocks
+releases: true
+reponame: package-pylocks
+repourl: https://github.com/radio-aktywne/package-pylocks
