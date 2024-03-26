@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pylocks"
-version = "0.2.0"
+version = "0.3.0"
 description = "Locking utilities for Python 🐍"
 authors = ["radio-aktywne <it@radioaktywne.pl>"]
 
