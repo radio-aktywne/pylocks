@@ -52,7 +52,7 @@ class BaseLockTest(ABC):
     async def test_acquire_release(self, builder: LockLifespanBuilder) -> None:
         """Test that a lock can be acquired and released."""
 
-        async with (await builder.build()) as lock:
+        async with await builder.build() as lock:
             await lock.acquire()
             await lock.release()
             await lock.acquire()
@@ -62,7 +62,7 @@ class BaseLockTest(ABC):
     async def test_context_manager(self, builder: LockLifespanBuilder) -> None:
         """Test that a lock can be used as a context manager."""
 
-        async with (await builder.build()) as lock:
+        async with await builder.build() as lock:
             async with lock:
                 pass
 
@@ -109,7 +109,7 @@ class BaseLockTest(ABC):
 
             released_by_second.set()
 
-        async with (await builder.build()) as lock:
+        async with await builder.build() as lock:
             first = asyncio.create_task(acquire_first(lock))
             second = asyncio.create_task(acquire_second(lock))
 
