@@ -3,7 +3,7 @@ slug: /
 title: Index
 ---
 
-# pylocks package
+# pylocks
 
 Locking utilities for Python 🐍
 
