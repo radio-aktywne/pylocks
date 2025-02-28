@@ -21,6 +21,6 @@ class AsyncioLockLifespanBuilder(LockLifespanBuilder):
 
 
 class TestAsyncioLock(BaseLockTest):
-    @pytest.fixture()
+    @pytest.fixture
     def builder(self) -> AsyncioLockLifespanBuilder:
         return AsyncioLockLifespanBuilder()
