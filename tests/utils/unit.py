@@ -41,14 +41,14 @@ class LockLifespanBuilder(ABC):
 class BaseLockTest(ABC):
     """Base class for testing a lock."""
 
-    @pytest.fixture()
+    @pytest.fixture
     @abstractmethod
     def builder(self) -> LockLifespanBuilder:
         """Return a builder for a lock lifespan."""
 
         pass
 
-    @pytest.mark.asyncio(scope="session")
+    @pytest.mark.asyncio(loop_scope="session")
     async def test_acquire_release(self, builder: LockLifespanBuilder) -> None:
         """Test that a lock can be acquired and released."""
 
@@ -58,7 +58,7 @@ class BaseLockTest(ABC):
             await lock.acquire()
             await lock.release()
 
-    @pytest.mark.asyncio(scope="session")
+    @pytest.mark.asyncio(loop_scope="session")
     async def test_context_manager(self, builder: LockLifespanBuilder) -> None:
         """Test that a lock can be used as a context manager."""
 
@@ -66,7 +66,7 @@ class BaseLockTest(ABC):
             async with lock:
                 pass
 
-    @pytest.mark.asyncio(scope="session")
+    @pytest.mark.asyncio(loop_scope="session")
     async def test_waits_when_locked(self, builder: LockLifespanBuilder) -> None:
         """Test that a lock waits when locked."""
 
