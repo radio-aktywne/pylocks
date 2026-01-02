@@ -2,7 +2,7 @@
 
 <div align="center">
 
-Locking utilities for Python 🐍
+Locking utilities package for Python 🐍
 
 [![Lint](https://github.com/radio-aktywne/pylocks/actions/workflows/lint.yaml/badge.svg)](https://github.com/radio-aktywne/pylocks/actions/workflows/lint.yaml)
 [![Test](https://github.com/radio-aktywne/pylocks/actions/workflows/test.yaml/badge.svg)](https://github.com/radio-aktywne/pylocks/actions/workflows/test.yaml)
@@ -14,7 +14,8 @@ Locking utilities for Python 🐍
 
 ## 💡 About
 
-This package provides implementations of various asynchronous locks
+`pylocks` is a [`Python`](https://www.python.org) package
+that provides implementations of various asynchronous locks
 to simplify implementing exclusive access to resources in concurrent code.
 
 ## 📄 Further Reading

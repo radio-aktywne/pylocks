@@ -1,5 +1,6 @@
 import asyncio
 from abc import ABC, abstractmethod
+from types import TracebackType
 
 import pytest
 
@@ -12,20 +13,21 @@ class LockLifespan(ABC):
     async def __aenter__(self) -> Lock:
         return await self.enter()
 
-    async def __aexit__(self, *args, **kwargs) -> None:
-        await self.exit()
+    async def __aexit__(
+        self,
+        exception_type: type[BaseException] | None,
+        exception: BaseException | None,
+        traceback: TracebackType | None,
+    ) -> None:
+        return await self.exit()
 
     @abstractmethod
     async def enter(self) -> Lock:
         """Enter the lifespan of the lock."""
 
-        pass
-
     @abstractmethod
     async def exit(self) -> None:
         """Exit the lifespan of the lock."""
-
-        pass
 
 
 class LockLifespanBuilder(ABC):
@@ -34,8 +36,6 @@ class LockLifespanBuilder(ABC):
     @abstractmethod
     async def build(self) -> LockLifespan:
         """Build a lock lifespan."""
-
-        pass
 
 
 class BaseLockTest(ABC):
@@ -46,12 +46,9 @@ class BaseLockTest(ABC):
     def builder(self) -> LockLifespanBuilder:
         """Return a builder for a lock lifespan."""
 
-        pass
-
     @pytest.mark.asyncio(loop_scope="session")
     async def test_acquire_release(self, builder: LockLifespanBuilder) -> None:
         """Test that a lock can be acquired and released."""
-
         async with await builder.build() as lock:
             await lock.acquire()
             await lock.release()
@@ -61,15 +58,12 @@ class BaseLockTest(ABC):
     @pytest.mark.asyncio(loop_scope="session")
     async def test_context_manager(self, builder: LockLifespanBuilder) -> None:
         """Test that a lock can be used as a context manager."""
-
-        async with await builder.build() as lock:
-            async with lock:
-                pass
+        async with await builder.build() as lock, lock:
+            pass
 
     @pytest.mark.asyncio(loop_scope="session")
-    async def test_waits_when_locked(self, builder: LockLifespanBuilder) -> None:
+    async def test_waits_when_locked(self, builder: LockLifespanBuilder) -> None:  # noqa: PLR0915
         """Test that a lock waits when locked."""
-
         tried_by_first = asyncio.Event()
         tried_by_second = asyncio.Event()
 
