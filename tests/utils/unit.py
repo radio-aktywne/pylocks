@@ -62,7 +62,7 @@ class BaseLockTest(ABC):
             pass
 
     @pytest.mark.asyncio(loop_scope="session")
-    async def test_waits_when_locked(self, builder: LockLifespanBuilder) -> None:  # noqa: PLR0915
+    async def test_waits_when_locked(self, builder: LockLifespanBuilder) -> None:
         """Test that a lock waits when locked."""
         tried_by_first = asyncio.Event()
         tried_by_second = asyncio.Event()
